@@ -1,0 +1,299 @@
+#include <iostream>
+#include <cstdlib>
+#include <list>
+
+using namespace std;
+
+
+const   int    TAMMAX = 10;
+
+typedef string nombre;
+
+typedef struct {
+    nombre datos[TAMMAX];
+    int  ultimo=-1;
+}lista_nombres;
+
+/// ** METODOS PARA OPERAR LA LISTA
+/// HACE UN BARRDIO LINEAL DESDE LA POSICION 0 HASTA LA ULTIMA POSICION
+int busqueda_lineal(nombre elem, lista_nombres *L) {
+    for (int i = 0; i < L->ultimo + 1; i++) {
+        if(L->datos[i] == elem)
+            return i;
+
+    }
+    return -1;
+}
+// inicializa la lista
+void inicializa(lista_nombres *L)
+ {
+    L->ultimo = -1;
+}
+
+/// REVISA SI LA LISTA ESTA VACIA
+bool vacia(lista_nombres *L) {
+    if(L->ultimo == -1)
+        return true;
+    return false;
+}
+///VERIFICA SI LA LSTA ESTA LLENA
+bool llena(lista_nombres *L) {
+    if(L->ultimo == (TAMMAX - 1))
+        return true;
+    return false;
+}
+/// INSERTA UN ELEMENTO DE FORMA CONTINUA
+void inserta(nombre elem, int pos, lista_nombres *L) {
+
+    if(llena(L) || pos < 0 || pos > L->ultimo + 1) {
+        cout << "LA LISTA ESTA LLENA O LA POSICION NO ES VALIDA " << endl;
+        return;
+    }
+
+    for (int i = L->ultimo + 1; i > pos; i--) {
+        L->datos[i] = L->datos[i - 1];
+    }
+
+    L->datos[pos] = elem;
+    L->ultimo++;
+
+}
+/// ELIMINA UN ELEMNTO SEGUN AL POSICION INSERTADA
+void elimina(int pos, lista_nombres *L) {
+    if(vacia(L) || pos < 0 || pos > L->ultimo + 1) {
+        cout << "LA LISTA ESTA VACIA O LA POSICION NO ES VALIDA" << endl;
+        return;
+    }
+
+    for (int i = pos; i < L->ultimo; i++) {
+        L->datos[i] = L->datos[i + 1];
+    }
+
+    L->ultimo--;
+}
+///RETORNA LA POSCION DEL PRIMER ELEMENTO
+int primero(lista_nombres *L) {
+    if(vacia(L))
+        return -1;
+    return 0;
+}
+///RETORNA LA POSICION DEL ULTIMO ELEMENTO
+int ultimo(lista_nombres *L) {
+    return L->ultimo;
+}
+///RETORNA LA POSICION DEL ELEMENTO ANTERIOR
+int anterior(int pos, lista_nombres *L) {
+
+    if(vacia(L) || pos < 0 || pos > L->ultimo) {
+        cout << "LA LISTA ESTA VACIA O LA POSICION NO ES VALIDA" << endl;
+        return -1;
+    }
+
+    return pos - 1;
+}
+///RETORNA LA POSCION DEL ELEMENTO SIGUIENTE
+int siguiente(int pos, lista_nombres *L) {
+    if(vacia(L) || pos < 0 || pos > L->ultimo) {
+        cout << "LA LISTA ESTA VACIA O LA POSICION NO ES VALIDA" << endl;
+        return -1;
+    }
+    return pos + 1;
+}
+///RETORNA LA POSICION DE UN ELEMENTO DADO
+int localiza(nombre elem, lista_nombres *L) {
+    if(vacia(L))
+        return -1;
+    return busqueda_lineal(elem, L);
+}
+///RECUPERA EL ELEMENTO DE UNA POSICION DADA
+nombre recupera(int pos, lista_nombres *L) {
+
+    if(vacia(L) || pos < 0 || pos > L->ultimo) {
+        cout << "LA LISTA ESTA VACIA O LA POSICION NO ES VALIDA" << endl;
+        return NULL;
+    }
+
+    return L->datos[pos];
+}
+
+// imprime los elementos de la lista
+void imprime(lista_nombres *L) {
+
+    if(vacia(L)) {
+        cout << "LA LISTA SE ENCUENTRA VACIA" << endl;
+        return;
+    }
+
+    for (int i = 0; i < L->ultimo + 1; i++) {
+        cout << "[" << L->datos[i] << "] ";
+    }
+
+}
+// elimina todos los elementos de la lista
+void anula(lista_nombres *L) {
+    for (int i = 0; i < L->ultimo + 1; i++) {
+        L->datos[i].clear();
+    }
+    inicializa(L);
+}
+
+void insertaInicio(nombre elem, lista_nombres *L) {
+    inserta(elem, 0, L);
+}
+
+// inserta si la lista no esta llena e inserta el inicio
+void insertaVacia(nombre elem, lista_nombres *L) {
+    if(!vacia(L)) {
+        cout << "LA LISTA DEBE ESTAR VACIA" << endl;
+        return;
+    }
+    insertaInicio(elem, L);
+}
+
+void insertaFinal(nombre elem, lista_nombres *L) {
+    if(llena(L)) {
+        cout << "LA LISTA ESTA LLENA NO SE PUEDE INSERTAR AL FINAL ";
+        return;
+    }
+    inserta(elem, L->ultimo +1, L);
+}
+
+
+int main(int argc, const char * argv[]) {
+
+    lista_nombres L;
+
+    string nombre;
+    int    opc = 0, pos = 0;
+    bool   salir = false;
+
+    enum lista_menu { INICIALIZA = 1, VACIA, LLENA, INSERTA, ELIMINA, PRIMERO, ULTIMO, ANTERIOR,
+                      SIGUIENTE, LOCALIZA, RECUPERA, ORDENA,IMPRIME, ANULA, INSERTA_VACIA,
+                      INSERTA_INICIO, INSERTA_FINAL, SALIR = 0};
+
+    do {
+        cout << "LISTA ESTATICA" << endl << endl;
+        imprime(&L);
+        cout << endl << endl;
+        cout << "1.- INICIALIZA" << endl;
+        cout << "2.- VACIA"      << endl;
+        cout << "3.- LLENA"      << endl;
+        cout << "4.- INSERTA"    << endl;
+        cout << "5.- ELIMINA"    << endl;
+        cout << "6.- PRIMERO"    << endl;
+        cout << "7.- ULTIMO"     << endl;
+        cout << "8.- ANTERIOR"   << endl;
+        cout << "9.- SIGUIENTE"  << endl;
+        cout << "10.- LOCALIZA"  << endl;
+        cout << "11.- RECUPERA"  << endl;
+        cout << "12.- IMPRIME"   << endl;
+        cout << "13.- ANULA"     << endl;
+        cout << "14.- INSERTA VACIA"  << endl;
+        cout << "15.- INSERTA AL INICIO" << endl;
+        cout << "16.- INSERTA AL FINAL"  << endl;
+        cout << "0.- SALIR"  << endl;
+        cout << "SELECCIONAR OPCION: ";
+        cin >> opc;
+        cin.ignore();
+        system("cls");
+        switch (opc) {
+            case INICIALIZA:
+                inicializa(&L);
+                cout << "LISTA INICIALIZADA" << endl;
+                break;
+            case VACIA:
+                if(vacia(&L))
+                    cout << "LA LISTA ESTA VACIA" << endl;
+                else
+                    cout << "LA LISTA CONTIENE ELEMENTOS" << endl;
+                break;
+            case LLENA:
+                if(llena(&L))
+                    cout << "LA LISTA ESTA LLENA" << endl;
+                else
+                    cout << "LA LISTA NO ESTA LLENA " << endl;
+                break;
+            case INSERTA:
+                cout << "INGRESE SU NOMBRE: ";
+                getline(cin, nombre);
+                cout << "INGRESE LA POSICION EN LA QUE DESEA INSERTAR: ";
+                cin >> pos;
+                inserta(nombre, pos, &L);
+                break;
+            case ELIMINA:
+                cout << "INGRESE LA POSICION QUE DESEA ELIMINAR: ";
+                cin >> pos;
+                elimina(pos, &L);
+                break;
+            case PRIMERO:
+                if(primero(&L) == -1)
+                    cout << "LA LISTA ESTA VACIA";
+                else
+                   cout<< primero(&L);
+                break;
+            case ULTIMO:
+                cout << ultimo(&L);
+                break;
+            case ANTERIOR:
+                cout << "INGRESE UNA POSICION: ";
+                cin >> pos;
+                cout<<"\nLA POSICION ANTERIOR ES: ";
+                cout << anterior(pos, &L);
+                break;
+            case SIGUIENTE:
+                cout << "INGRESE UNA POSICION: ";
+                cin >> pos;
+                cout<<"\nLA POSICION SIGUIENTE ES: ";
+                cout << siguiente(pos, &L);
+                break;
+            case ORDENA:
+
+            case LOCALIZA:
+                cout << "LOCALIZACION DEL NOMBRE: ";
+                getline(cin, nombre);
+                cout<<localiza(nombre, &L);
+                break;
+            case RECUPERA:
+                cout << "RECUPERAR EL ELEMENTO DE LA POSICION: ";
+                cin >> pos;
+                cout<<endl;
+                cout << recupera(pos, &L);
+                cout<<endl;
+                break;
+            case IMPRIME:
+                imprime(&L);
+                break;
+            case ANULA:
+                anula(&L);
+                cout << "LA LISTA FUE ANULADA";
+                break;
+            case INSERTA_VACIA:
+                cout << "INGRESE EL NOMBRE: ";
+                getline(cin, nombre);
+                insertaVacia(nombre, &L);
+                break;
+            case INSERTA_INICIO:
+                cout << "INGRESE EL NOMBRE: ";
+                getline(cin, nombre);
+                insertaInicio(nombre, &L);
+                break;
+            case INSERTA_FINAL:
+                cout << "NOMBRE A INSERTAR: ";
+                getline(cin, nombre);
+                insertaFinal(nombre, &L);
+                break;
+            case SALIR:
+
+                salir = true;
+                break;
+            default:
+                cout << "LA OPCION NO ES VALIDA, INGRESE DE NUEVO UNA OPCION " << endl;
+                break;
+        }
+        cin.ignore();
+        system("pause");
+        system("cls");
+    } while ( !salir );
+
+    return 0;
+}

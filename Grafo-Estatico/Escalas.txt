@@ -1,0 +1,10 @@
+Mazatlan|Monterrey|200
+Mazatlan|Guadalajara|400
+Mazatlan|Chihuahua|600
+Monterrey|Guadalajara|300
+Monterrey|Toluca|500
+Monterrey|Chihuahua|500
+Guadalajara|Toluca|200
+Guadalajara|Chihuahua|500
+Toluca|Chihuahua|700
+Toluca|Oaxaca|400

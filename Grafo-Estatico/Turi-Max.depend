@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1478470456 source:c:\users\user\documents\cucei\4_semestre\estructura_de_datos_2\p_9_grafo_estatico\turi-max\main.cpp
+	<iostream>
+	"Grafo.h"
+
+1478112899 source:c:\users\user\documents\cucei\4_semestre\estructura_de_datos_2\p_9_grafo_estatico\turi-max\arista.cpp
+	"Arista.h"
+
+1478112954 c:\users\user\documents\cucei\4_semestre\estructura_de_datos_2\p_9_grafo_estatico\turi-max\arista.h
+	"Grafo.h"
+	<iostream>
+
+1478470404 source:c:\users\user\documents\cucei\4_semestre\estructura_de_datos_2\p_9_grafo_estatico\turi-max\grafo.cpp
+	"Grafo.h"
+
+1478470257 c:\users\user\documents\cucei\4_semestre\estructura_de_datos_2\p_9_grafo_estatico\turi-max\grafo.h
+	<iostream>
+	<fstream>
+	<cstring>
+	<cstdlib>
+
+1478111279 source:c:\users\user\documents\cucei\4_semestre\estructura_de_datos_2\p_9_grafo_estatico\turi-max\vertice.cpp
+	"Vertice.h"
+
+1478113035 c:\users\user\documents\cucei\4_semestre\estructura_de_datos_2\p_9_grafo_estatico\turi-max\vertice.h
+	"Grafo.h"
+	<iostream>
+
+1478470482 source:c:\users\l_u_i.desktop-dmtfsm7\documents\luis\tercer semeste\estructura de datos 2\turi-max\grafo.cpp
+	"Grafo.h"
+
+1478470258 c:\users\l_u_i.desktop-dmtfsm7\documents\luis\tercer semeste\estructura de datos 2\turi-max\grafo.h
+	<iostream>
+	<fstream>
+	<cstring>
+	<cstdlib>
+

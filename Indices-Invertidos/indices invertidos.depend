@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1474849654 source:c:\users\eduardo fajardo\desktop\indices invertidos\main.cpp
+	<iostream>
+	<string.h>
+	<fstream>
+
+1474855042 source:c:\users\user\documents\cucei\4_semestre\estructura_de_datos_2\p_5_indices_invertidos\indices invertidos\main.cpp
+	<iostream>
+	<string.h>
+	<fstream>
+	<cstdlib>
+
